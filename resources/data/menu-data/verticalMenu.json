@@ -1,0 +1,57 @@
+{
+  "menu": [
+    {
+      "url": "home",
+      "name": "Home",
+      "icon": "home",
+      "slug": "home"
+    },
+    {
+      "name": "Kelola Data",
+      "icon": "book",
+      "role": "direksi",
+      "slug": "",
+      "submenu": [
+        {
+          "url": "/karyawan/index",
+          "name": "Karyawan",
+          "icon": "user",
+          "slug": "karyawan.index"
+        },
+        {
+          "url": "/unit/index",
+          "name": "Unit Bisnis",
+          "icon": "database",
+          "slug": "unit.index"
+        },
+        {
+          "url": "/ruang/index",
+          "name": "Ruang",
+          "icon": "home",
+          "slug": "ruang.index"
+       
+        }
+      ]
+    },
+    {
+      "name": "Event",
+      "icon": "calendar",
+      "slug": "",
+      "submenu": [
+        {
+          "url": "/event/index",
+          "name": "Acara",
+          "icon": "calendar",
+          "slug": "event.index"
+        },
+        {
+          "url": "/event/myevent",
+          "name": "Acara Saya",
+          "icon": "calendar",
+          "slug": "event.myevents"
+        }
+      ]
+    }
+  ]
+}
+
