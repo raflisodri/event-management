@@ -19,6 +19,9 @@
             <input type="text" class="form-control" name="nama" placeholder="Masukan Nama Unit Bisnis" aria-describedby="button-addon2">
             <button class="btn btn-primary" type="submit" id="button-addon2">Tambah Data</button>
         </div>
+        @error('nama')
+        <div class="alert alert-danger my-2 py-1" role="alert" style="text-align: center">{{ $message }}</div>
+       @enderror
     </form>
     
  

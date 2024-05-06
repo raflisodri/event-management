@@ -40,12 +40,6 @@ class partisipanController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request);
-        // $request->validate([
-        //     'acara_id' => 'required|exists:acara,id', // Pastikan idacara ada di tabel acara
-        //     'partisipan' => 'required|array', // Pastikan partisipan adalah array
-        //     'partisipan.*' => 'exists:users,id', 
-        // ]);
 
         foreach ($request->user_id as $user_id) {
             Partisipan::create([
@@ -56,4 +50,14 @@ class partisipanController extends Controller
 
         return redirect()->back()->with('success', 'Partisipan berhasil ditambahkan.');
     }
+    public function delete($id)
+    {
+
+      $partisipan = Partisipan::findOrFail($id);
+    
+      $partisipan->delete();
+
+        return redirect()->back()->with('tidak', 'Anda berhasil Mengubah status sebagai partisipan.');
+    }    
+
 }

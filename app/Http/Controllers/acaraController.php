@@ -15,7 +15,7 @@ class acaraController extends Controller
 {
     public function index()
     {
-        $acara = Acara::all();
+        $acara = Acara::orderBy('created_at', 'desc')->get();
         $user = User::all();
         $ruang = Ruang::where('status', '=', '1')->get();
 
@@ -35,7 +35,7 @@ class acaraController extends Controller
 
         $pageConfigs = ['layoutWidth' => 'full'];
         $breadcrumbs = [
-            ['link' => "home", 'name' => "Home"], ['name' => "Layouts"], ['name' => "Layout Full"]
+            ['link' => "home", 'name' => "Home"], ['name' => "Acara"]
         ];
     
         return view('/home/event/index', compact('acara', 'user', 'ruang', 'pageConfigs', 'breadcrumbs'));
@@ -45,10 +45,9 @@ class acaraController extends Controller
     public function store(Request $request)
     {
         // dd($request);
-        try {
-            $validatedData = $request->validate([
-                'judul' => 'required|string|max:255',
-                'tgl_acara' => 'required|date',
+        $validatedData = $request->validate([
+            'judul' => 'required|string|max:255',
+            'tgl_acara' => 'required|date',
                 'wk_awal' => 'required|date_format:H:i',
                 'wk_akhir' => 'required|date_format:H:i',
                 'wk_res' => 'required|date',
@@ -77,7 +76,7 @@ class acaraController extends Controller
 
             $titlePrefix = ($gender == 'pria') ? '<b>Kang</b>' : '<b>Teh</b>';
             $koordinator = '<b>'.$koordinatorName.'</b>';
-
+            
             $tempatArray = $request->tempat;
             $namaRuangList = [];
             foreach ($tempatArray as $id_ruang) {
@@ -85,12 +84,12 @@ class acaraController extends Controller
                 $namaRuangList[] = $namaRuang;
             }
             $tempatList = implode(', ', $namaRuangList); 
-
+            
             $judul = $validatedData['judul'];
             $tgl_acara = date('d F Y', strtotime($validatedData['tgl_acara']));
             $wk_res = date('d F Y', strtotime($validatedData['wk_res']));
             $koordinator = $koordinatorName;
-    
+            
             $text = "Halo Akang Teteh Kabayan Group, {$titlePrefix} <b>{$koordinator}</b>, telah membuat acara dengan judul, '{$judul}', Acara ini akan berlangsung pada {$tgl_acara}, dan akan berlangsung di : <b>{$tempatList}</b>. Jangan lupa untuk reservasi di Siiteung ya, karena reservasi ditutup pada tanggal {$wk_res}.  ";
 
             $telegram = new Api('6997727713:AAHj23NnCJ2J7KtMTqix3t5QHJZm5SnwIpg');
@@ -99,7 +98,8 @@ class acaraController extends Controller
                 'text' => $text,
                 'parse_mode' => 'HTML'
             ]);
-
+            
+            try {
             return redirect()->route('event.index')->with('tambah', 'Data Acara Berhasil Di Tambahkan'); 
         } catch (\Throwable $th) {
             return redirect()->route('event.index')->with('eror', 'Data Acara Gagal Di Tambahkan'); 
@@ -161,7 +161,7 @@ class acaraController extends Controller
 
     $pageConfigs = ['layoutWidth' => 'full'];
     $breadcrumbs = [
-        ['link' => "home", 'name' => "Home"], ['name' => "Events"], ['name' => "My Events"]
+        ['link' => "home", 'name' => "Home"], ['name' => "acara saya"]
     ];
 
     return view('home.event.myevent', compact('acara', 'user', 'ruang', 'pageConfigs', 'breadcrumbs'));
@@ -238,7 +238,130 @@ class acaraController extends Controller
         return redirect()->route('home')->with('error', 'Acara tidak ditemukan.');
     }
     }
+
+    public function print($id)
+    {
+
+    $acara = Acara::find($id);
+    $usersa = User::all();
+    if ($acara) {
+        $acara->participantCount = Partisipan::where('acara_id', $acara->id)->count();
+        $partisipan = Partisipan::where('acara_id', $id)->get();
+
+        $detailTempat = DetailTempat::whereHas('acara', function ($query) use ($id) {
+            $query->where('id', $id);
+        })->get();
+
+        $namaRuang = [];
+
+        if ($detailTempat->isNotEmpty()) {
+            foreach ($detailTempat as $detail) {
+                $namaRuang[] = $detail->ruang->nama;
+            }
+        }
+
+        $namaRuangString = implode(', ', $namaRuang);
+
+
+        return view('home.event.print', compact('acara', 'usersa', 'partisipan', 'namaRuangString'));
+    } else {
+        return redirect()->route('home')->with('error', 'Acara tidak ditemukan.');
+    }
+    }
+
+    public function delete($id)
+    {
+
+      $acara = Acara::findOrFail($id);
+
+      DetailTempat::where('id_acara', $id)->delete();
+      Partisipan::where('acara_id', $id)->delete();
     
+      $acara->delete();
+
+        return redirect()->back()->with('delete', 'Data Acara Berhasil Di hapus.');
+    }    
 
 
+    public function edit($id)
+    {
+
+    $acara = Acara::find($id);
+    $user= User::all();
+    $ruang = Ruang::all();
+
+    if ($acara) {
+        $acara->participantCount = Partisipan::where('acara_id', $acara->id)->count();
+        $partisipan = Partisipan::where('acara_id', $id)->get();
+
+        $detailTempat = DetailTempat::whereHas('acara', function ($query) use ($id) {
+            $query->where('id', $id);
+        })->get();
+
+        $namaRuang = [];
+
+        if ($detailTempat->isNotEmpty()) {
+            foreach ($detailTempat as $detail) {
+                $namaRuang[] = $detail->ruang->nama;
+            }
+        }
+
+        $namaRuangString = implode(', ', $namaRuang);
+
+        $pageConfigs = ['layoutWidth' => 'full'];
+
+        $breadcrumbs = [
+            ['link' => "home", 'name' => "Home"],
+            ['name' => "acara"],
+        ];
+
+        return view('home.event.edit', compact('acara', 'user', 'ruang', 'partisipan', 'pageConfigs', 'breadcrumbs', 'namaRuangString'));
+    } else {
+        return redirect()->route('home')->with('error', 'Acara tidak ditemukan.');
+    }
+    }
+
+    public function update(Request $request, $id)
+    {
+        
+        try {
+        $validatedData = $request->validate([
+            'judul' => 'required|string|max:255',
+            'tgl_acara' => 'required|date',
+            'wk_awal' => 'required|date_format:H:i',
+            'wk_akhir' => 'required|date_format:H:i',
+            'wk_res' => 'required|date',
+            'koordinator' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+        ]);
+    
+        $validatedData['tgl_acara'] = date('Y-m-d', strtotime($validatedData['tgl_acara']));
+        $validatedData['wk_res'] = date('Y-m-d', strtotime($validatedData['wk_res']));
+        $validatedData['wk_awal'] = date('H:i', strtotime($validatedData['wk_awal']));
+        $validatedData['wk_akhir'] = date('H:i', strtotime($validatedData['wk_akhir']));
+
+        $acara = Acara::find($id);
+        $acara->judul = $validatedData['judul'];
+        $acara->tgl_acara = $validatedData['tgl_acara'];
+        $acara->wk_awal = $validatedData['wk_awal'];
+        $acara->wk_res = $validatedData['wk_res'];
+        $acara->wk_akhir = $validatedData['wk_akhir'];
+        $acara->koordinator = $validatedData['koordinator'];
+        $acara->deskripsi = $validatedData['deskripsi'];
+
+        foreach ($request->tempat as $tempat) {
+            $detailTempat = new DetailTempat([
+                'id_acara' => $acara->id,
+                'tempat' => $tempat,
+            ]);
+            $detailTempat->save();
+        }
+
+        $acara->save();
+
+        return redirect()->route('event.myevents')->with('edit', 'Data Acara Berhasil Di Update'); 
+        } catch (\Throwable $th) {
+            return redirect()->route('event.myevents')->with('eror', 'Data Acara Gagal Di Update'); 
+        }
+    }
 }

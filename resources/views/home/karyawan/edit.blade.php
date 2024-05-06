@@ -137,20 +137,26 @@
                     <div class="input-group">
                       <input class="form-control form-control-merge" id="login-password" type="password" name="password" placeholder="············" aria-describedby="login-password" tabindex="2" value="{{$karyawan->password}}" />
                       <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
-                      @error('password')
-                      <div class="alert alert-danger my-2 py-1" role="alert" style="text-align: center">{{ $message }}</div>
-                     @enderror  
                     </div>
+                    @error('password')
+                    <div class="alert alert-danger my-2 py-1" role="alert" style="text-align: center">{{ $message }}</div>
+                   @enderror  
                   </div>
                 <div class="mb-1 col-md-6">
                   <label class="form-label" for="fp-defaultmk">Mulai kontrak</label>
                   <input type="date" id="fp-defaultmk" class="form-control flatpickr-basic" placeholder="YYYY-MM-DD" / name="mulai_kontrak" value="{{$karyawan->mulai_kontrak}}">
                 </div>
+                @error('mulai_kontrak')
+                <div class="alert alert-danger my-2 py-1" role="alert" style="text-align: center">{{ $message }}</div>
+               @enderror  
               </div>
             <div class="row">
               <div class="mb-1 col-md-6">
                 <label class="form-label" for="fp-defaultsk">Selesai kontrak</label>
                 <input type="date" id="fp-defaultsk" class="form-control flatpickr-basic" placeholder="YYYY-MM-DD" / name="selesai_kontrak" value="{{$karyawan->selesai_kontrak}}">
+                @error('selesai_kontrak')
+                <div class="alert alert-danger my-2 py-1" role="alert" style="text-align: center">{{ $message }}</div>
+               @enderror  
               </div>
               <div class="mb-1 col-md-6">
                 <label class="form-label" for="vertical-modern-country">Unit bisnis</label>

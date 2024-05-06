@@ -97,6 +97,9 @@
             <div class="col mb-3">
               <label for="nameBackdrop" class="form-label">Nama</label>
               <input type="text" id="nameBackdrop" class="form-control" placeholder="Enter Name" name="nama">
+              @error('nama')
+                  <div class="text-danger">{{$message}}</div>
+              @enderror
             </div>
           </div>
           <div class="row g-2">
@@ -107,6 +110,9 @@
                     <option value="Indoor">Indoor</option>
                     <option value="Outdoor">Outdoor</option>
                 </select>
+                @error('jenis')
+                    <div class="text-danger">{{$message}}</div>
+                @enderror
             </div>
 
             <div class="col mb-0">
@@ -114,6 +120,9 @@
                 <select id="tempatSelect" class="select2 form-select" aria-label="Default select example" name="tempat">
                     <option selected>Pilih Tempat</option>
                 </select>
+                @error('tempat')
+                    <div class="text-danger">{{$message}}</div>
+                @enderror
             </div>
           </div>
         </div>
@@ -191,6 +200,30 @@ let table = new DataTable('#example', {
         });
     </script>
 @endif
+
+@if(session('on'))
+    <script>
+        Swal.fire({
+            title: "Success!",
+            text: "{{ session('on') }}",
+            icon: "success",
+            button: "OK",
+        });
+    </script>
+@endif
+
+@if(session('off'))
+    <script>
+        Swal.fire({
+            title: "Success!",
+            text: "{{ session('off') }}",
+            icon: "success",
+            button: "OK",
+        });
+    </script>
+@endif
+
+
 
 <script>
     $('.nonaktif').on('click', function () {
@@ -285,9 +318,9 @@ $(document).ready(function() {
             $('#tempatSelect').append('<option selected>Pilih Tempat</option>');
             $('#tempatSelect').append('<optgroup label="Outdoor">' +
                                           '<option value="Belakang A1">Belakang A1</option>' +
-                                          '<option value="Belakang A1">Belakang B1</option>' +
-                                          '<option value="Belakang A1">Belakang C1</option>' +
-                                          '<option value="Belakang A1">Belakang D1</option>' +
+                                          '<option value="Belakang B1">Belakang B1</option>' +
+                                          '<option value="Belakang C1">Belakang C1</option>' +
+                                          '<option value="Belakang D1">Belakang D1</option>' +
                                       '</optgroup>');
         } else {
             $('#tempatSelect').append('<option selected>Pilih Tempat</option>');

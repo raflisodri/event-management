@@ -5,6 +5,15 @@ $configData = Helper::applClasses();
 
 @section('title', 'Login Page')
 
+<style>
+  .logo-container {
+  display: flex;
+  align-items: center; /* Agar gambar sejajar secara vertikal */
+  justify-content: start; /* Untuk mengatur posisi gambar, gunakan 'center' jika ingin di tengah */
+  gap: 10px; /* Jarak antara dua gambar */
+}
+</style>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
 @section('page-style')
@@ -41,7 +50,12 @@ $configData = Helper::applClasses();
           </g>
         </g>
       </svg> --}}
-      <img src="{{ asset('/logo/kg.png') }}" alt="" width="70px"> 
+      <div class="logo-container">
+        <img src="{{ asset('/logo/KAN.png') }}" alt="" style="width: 70px;">
+        <img src="{{ asset('/logo/kg.png') }}" alt="" style="width: 60px; height: 50px;">
+        <img src="{{ asset('/logo/KUR.png') }}" alt="" style="width: 100px; height: 90px;">
+      </div>
+      
       <h2 class="brand-text text-primary ms-10">KABAYAN GROUP</h2>
     </a>
     <!-- /Brand logo-->

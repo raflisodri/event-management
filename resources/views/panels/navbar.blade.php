@@ -101,6 +101,9 @@
             <i class="me-50" data-feather="key"></i> API Tokens
           </a>
         @endif --}}
+        <a class="dropdown-item" href="{{route('logout')}}">
+          <i class="me-50" data-feather="log-out"></i> Logout
+        </a>
         <a class="dropdown-item" href="#">
           <i class="me-50" data-feather="settings"></i> Settings
         </a>

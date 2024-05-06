@@ -10,6 +10,9 @@
                     <div class="col mb-3">
                         <label for="nameBackdrop" class="form-label">Nama</label>
                         <input type="text" id="nameBackdrop" class="form-control" placeholder="Enter Name" name="nama" value="{{$ruang->nama}}">
+                        @error('nama')
+                        <div class="text-danger">{{$message}}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="row g-2">
@@ -20,6 +23,9 @@
                             <option value="Indoor">Indoor</option>
                             <option value="Outdoor">Outdoor</option>
                         </select>
+                        @error('jenis')
+                        <div class="text-danger">{{$message}}</div>
+                       @enderror
                     </div>
 
                     <div class="col mb-0">
@@ -27,6 +33,9 @@
                         <select id="tempatSelect1" class="select2 form-select" aria-label="Default select example" name="tempat">
                             <option selected>Pilih Tempat</option>
                         </select>
+                        @error('tempat')
+                        <div class="text-danger">{{$message}}</div>
+                    @enderror
                     </div>
                 </div>
             </div>
@@ -65,9 +74,9 @@
                     $('#tempatSelect1').append('<option selected>Pilih Tempat</option>');
                     $('#tempatSelect1').append('<optgroup label="Outdoor">' +
                                                   '<option value="Belakang A1">Belakang A1</option>' +
-                                                  '<option value="Belakang A1">Belakang B1</option>' +
-                                                  '<option value="Belakang A1">Belakang C1</option>' +
-                                                  '<option value="Belakang A1">Belakang D1</option>' +
+                                                  '<option value="Belakang B1">Belakang B1</option>' +
+                                                  '<option value="Belakang C1">Belakang C1</option>' +
+                                                  '<option value="Belakang D1">Belakang D1</option>' +
                                               '</optgroup>');
                 } else {
                     $('#tempatSelect').append('<option selected>Pilih Tempat</option>');

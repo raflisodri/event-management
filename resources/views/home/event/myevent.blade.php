@@ -1,33 +1,12 @@
 @extends('layouts/contentLayoutMaster')
 
-@section('title', 'Layout Full')
+@section('title', 'Acara saya')
 
 @section('content')
 
-<link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.2/af-2.7.0/b-3.0.1/b-colvis-3.0.1/b-html5-3.0.1/b-print-3.0.1/cr-2.0.0/date-1.5.2/fc-5.0.0/fh-4.0.1/kt-2.12.0/r-3.0.0/rg-1.5.0/rr-1.5.0/sc-2.4.1/sb-1.7.0/sp-2.3.0/sl-2.0.0/sr-1.4.0/datatables.min.css" rel="stylesheet">
-
-@section('vendor-style')
-  <!-- vendor css files -->
-   <link rel="stylesheet" href="{{ asset(mix('vendors/css/forms/select/select2.min.css')) }}">
-  <link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/pickadate/pickadate.css')) }}">
-  <link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/flatpickr/flatpickr.min.css')) }}">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inconsolata&family=Roboto+Slab&family=Slabo+27px&family=Sofia&family=Ubuntu+Mono&display=swap" rel="stylesheet">
-@endsection
-
-@section('page-style')
-  <!-- Page css files --> 
-  <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/pickers/form-flat-pickr.css')) }}">
-  <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/pickers/form-pickadate.css')) }}">
- 
-@endsection
-
 <div class="card">
 <div class="card-header">
-{{-- 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exLargeModal">
-    Tambah data
-</button> --}}
+
 </div>
 <div class="card-body">
   
@@ -87,6 +66,24 @@
                     </svg>
                 </span>
             </a>
+            <a class="btn btn-success btn-sm btn-icon editButton" aria-valuetext="{{ $data->id }}">
+              <span class="svg-icon svg-icon-light svg-icon-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z" fill="currentColor"/>
+                      <path d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z" fill="currentColor"/>
+                      <path d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z" fill="currentColor"/>
+                  </svg>
+              </span>
+          </a>
+            <button type="button" class="btn btn-sm btn-icon btn-danger btnDelete" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-dark" data-bs-placement="top" title="Delete" data-id="{{$data->id}}">
+              <span class="svg-icon svg-icon-light svg-icon-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none">
+                      <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="currentColor"/>
+                      <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="currentColor"/>
+                      <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="currentColor"/>
+                  </svg>
+              </span>
+          </button>
             </td>       
           </tr>
           @endforeach
@@ -94,86 +91,35 @@
     </table>
 </div>
 </div>
-{{-- 
-    <div class="modal-dialog modal-xl" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel4">Tambah data Event</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="{{route('event.store')}}" method="POST">
-          @csrf
-          <div class="row">
-            <div class="col-6 mb-3">
-              <label for="nameExLarge-judul" class="form-label">Judul Acara</label>
-              <input type="text" id="nameExLarge-judul" name="judul" class="form-control" placeholder="Enter Name">
-            </div>
-            <div class="col-6 mb-3">
-              <label for="tgl_acara" class="form-label">Tanggal Acara</label>
-              <input type="date" id="tgl_acara" class="form-control flatpickr-basic" placeholder="YYYY-MM-DD" name="tgl_acara">
-          </div>
-          </div> 
-          <div class="row">
-            <div class="col-4 mb-3">
-              <label for="nameExLarge" class="form-label">Waktu Mulai Acara</label>
-              <input type="text" name="wk_awal" id="fp-time" class="form-control flatpickr-time text-start" placeholder="HH:MM" />
-            </div>
-            <div class="col-4 mb-3">
-              <label for="nameExLarge" class="form-label">Waktu Akhir Acara</label>
-              <input type="text" name="wk_akhir" id="fp-time" class="form-control flatpickr-time text-start" placeholder="HH:MM" />
-            </div>
-            <div class="col-4 mb-3">
-              <label for="nameExLarge-koor" class="form-label"> Koordinator </label>
-              <select class="select2 w-100" id="vertical-modern-koor" name="koordinator" id="">
-                <option label=" "></option>
-                @foreach($user as $singleUser)
-                <option value="{{ $singleUser->id }}">{{ $singleUser->name }}</option>
-                @endforeach
-              </select>              
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6 mb-3">
-              <label for="nameExLarge" class="form-label">Waktu Tutup Reservasi</label>
-              <input type="date" id="wk_res" class="form-control flatpickr-basic" placeholder="YYYY-MM-DD" name="wk_res" disabled>
-            </div>   
-            <div class="col-6 mb-3">
-              <label for="nameExLarge" class="form-label">Tempat Acara</label>
-              <select class="select2 form-select" id="select2-multiple" multiple name="tempat[]">
-                <option label=" "></option>
-                @foreach($ruang as $singleRuang)
-                <option value="{{ $singleRuang->id }}">{{ $singleRuang->nama }}</option>
-                @endforeach
-              </select>
-            </div>  
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <label class="form-label" for="fp-default">Deskripsi</label>
-              <textarea name="deskripsi" id="vertical-modern-deskripsi" class="form-control"  name="deskripsi" placeholder="Masukan deskripsi" cols="5" rows="3"></textarea>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
-        </div>
-      </form>
-          
+<!-- Modal Detail -->
+<div class="modal fade" id="detailMyModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detail data My Event</h5>
+        <a href="{{route('event.myevents')}}"><button type="button" class="btn-close"></button></a>
+      </div>
+      <div class="modal-body">
+        <div class="response-detail"></div>
       </div>
     </div>
-  </div> --}}
+  </div>
+</div>
 
-  <div class="modal fade" id="detailMyModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel4">Detail data My Event</h5>
-          <a href="{{route('event.index')}}"><button type="button" class="btn-close"></button></a>
-        </div>
-        <div class="response"></div>
-
+<!-- Modal Edit -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit data Event</h5>
+        <a href="{{route('event.index')}}"><button type="button" class="btn-close"></button></a>
+      </div>
+      <div class="modal-body">
+        <div class="response-edit"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
@@ -189,19 +135,52 @@ let table = new DataTable('#example', {
 </script>
 
 <script>
-  $('.btn-my-detail').on('click', function () {
-      var btnId = $(this).attr('aria-valuetext');
-      $.ajax({
-          type: "GET",
-          url: "{{ route('event.mydetail', '') }}" + '/' + btnId,
-          success: function (response) {
-              $('.response').html(response);
-              $('#detailMyModal').modal('show');
+  $('.btnDelete').on('click', function () {
+      var btnId = $(this).data('id');
+
+      Swal.fire({
+          title: 'Apakah anda yakin?',
+          text: "Anda akan menghapus data ini, dan tidak dapat mengembalikanya!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          cancelButtonText: 'Tidak',
+          confirmButtonText: 'Iya'
+      }).then((result) => {
+          if (result.isConfirmed) {
+              window.location.href= "{{ route('event.delete', '') }}" + '/' + btnId;
           }
       });
   });
 </script>
 
+<script>
+$('.btn-my-detail').on('click', function () {
+  var btnId = $(this).attr('aria-valuetext');
+  $.ajax({
+    type: "GET",
+    url: "{{ route('event.mydetail', '') }}" + '/' + btnId,
+    success: function (response) {
+      $('.response-detail').html(response); // Tempatkan pada elemen yang benar
+      $('#detailMyModal').modal('show');
+    }
+  });
+});
+
+$('.editButton').on('click', function () {
+  console.log("Button clicked!");
+  var btnId = $(this).attr('aria-valuetext');
+  $.ajax({
+    type: "GET",
+    url: "{{ route('event.edit', '') }}" + '/' + btnId,
+    success: function (response) {
+      $('.response-edit').html(response); // Tempatkan pada elemen yang benar
+      $('#editModal').modal('show');
+    }
+  });
+});
+</script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -322,22 +301,15 @@ let table = new DataTable('#example', {
     </script>
 @endif
 
-
-
-@section('vendor-script')
-  <script src="{{ asset(mix('vendors/js/forms/select/select2.full.min.js')) }}"></script>
-  <script src="{{ asset(mix('vendors/js/pickers/pickadate/picker.js')) }}"></script>
-  <script src="{{ asset(mix('vendors/js/pickers/pickadate/picker.date.js')) }}"></script>
-  <script src="{{ asset(mix('vendors/js/pickers/pickadate/picker.time.js')) }}"></script>
-  <script src="{{ asset(mix('vendors/js/pickers/pickadate/legacy.js')) }}"></script>
-  <script src="{{ asset(mix('vendors/js/pickers/flatpickr/flatpickr.min.js')) }}"></script>
-@endsection
-@section('page-script')
-  <script src="{{ asset(mix('js/scripts/forms/form-wizard.js')) }}"></script>
-  <script src="{{ asset(mix('js/scripts/forms/pickers/form-pickers.js')) }}"></script>
-  <script src="{{ asset(mix('js/scripts/forms/form-select2.js')) }}"></script>
-@endsection
-
-
+@if(session('eror'))
+    <script>
+        Swal.fire({
+            title: "Failed!",
+            text: "{{ session('eror') }}",
+            icon: "error",
+            button: "OK",
+        });
+    </script>
+@endif
 
 @endsection

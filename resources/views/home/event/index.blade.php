@@ -1,6 +1,6 @@
 @extends('layouts/contentLayoutMaster')
 
-@section('title', 'Layout Full')
+@section('title', 'Acara')
 
 @section('content')
 
@@ -110,20 +110,32 @@
             <div class="col-6 mb-3">
               <label for="nameExLarge-judul" class="form-label">Judul Acara</label>
               <input type="text" id="nameExLarge-judul" name="judul" class="form-control" placeholder="Enter Name">
+              @error('judul')
+              <div class="text-danger">{{$message}}</div>
+             @enderror
             </div>
             <div class="col-6 mb-3">
               <label for="tgl_acara" class="form-label">Tanggal Acara</label>
               <input type="date" id="tgl_acara" class="form-control flatpickr-basic" placeholder="YYYY-MM-DD" name="tgl_acara">
+              @error('tgl_acara')
+              <div class="text-danger">{{$message}}</div>
+              @enderror
           </div>
           </div> 
           <div class="row">
             <div class="col-4 mb-3">
               <label for="nameExLarge" class="form-label">Waktu Mulai Acara</label>
               <input type="text" name="wk_awal" id="fp-time" class="form-control flatpickr-time text-start" placeholder="HH:MM" />
+              @error('wk_awal')
+              <div class="text-danger">{{$message}}</div>
+          @enderror
             </div>
             <div class="col-4 mb-3">
               <label for="nameExLarge" class="form-label">Waktu Akhir Acara</label>
               <input type="text" name="wk_akhir" id="fp-time" class="form-control flatpickr-time text-start" placeholder="HH:MM" />
+              @error('wk_akhir')
+              <div class="text-danger">{{$message}}</div>
+          @enderror
             </div>
             <div class="col-4 mb-3">
               <label for="nameExLarge-koor" class="form-label"> Koordinator </label>
@@ -134,11 +146,17 @@
                 @endforeach
               </select>              
             </div>
+            @error('koordinator')
+            <div class="text-danger">{{$message}}</div>
+        @enderror
           </div>
           <div class="row">
             <div class="col-6 mb-3">
               <label for="nameExLarge" class="form-label">Waktu Tutup Reservasi</label>
               <input type="date" id="wk_res" class="form-control flatpickr-basic" placeholder="YYYY-MM-DD" name="wk_res" disabled>
+              @error('wk_res')
+              <div class="text-danger">{{$message}}</div>
+          @enderror
             </div>   
             <div class="col-6 mb-3">
               <label for="nameExLarge" class="form-label">Tempat Acara</label>
@@ -149,6 +167,9 @@
                 @endforeach
               </select>
               {{-- <input type="text" name="tp_acara" id="nameExLarge-tp" class="form-control" placeholder="Enter Name"> --}}
+              @error('tempat[]')
+              <div class="text-danger">{{$message}}</div>
+          @enderror
             </div>  
           </div>
           <div class="row">
@@ -156,6 +177,9 @@
               <label class="form-label" for="fp-default">Deskripsi</label>
               <textarea name="deskripsi" id="vertical-modern-deskripsi" class="form-control"  name="deskripsi" placeholder="Masukan deskripsi" cols="5" rows="3"></textarea>
             </div>
+            @error('deskripsi')
+            <div class="text-danger">{{$message}}</div>
+        @enderror
           </div>
         </div>
         <div class="modal-footer">
@@ -177,7 +201,7 @@
         </div>
         <div class="response"></div>
 
-
+      
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
@@ -338,7 +362,6 @@ let table = new DataTable('#example', {
   <script src="{{ asset(mix('js/scripts/forms/form-wizard.js')) }}"></script>
   <script src="{{ asset(mix('js/scripts/forms/pickers/form-pickers.js')) }}"></script>
 @endsection
-
 
 
 @endsection

@@ -1,49 +1,85 @@
 <style>
-.horizontal-table {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-}
+body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
 
-.event-details {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-right: 10px;
-}
+        h2 {
+            margin-bottom: 20px;
+        }
 
-.event-details div {
-    margin-bottom: 5px;
-}
+        .info-section {
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
 
-.event-details div strong {
-    margin-right: 5px;
-}
+        .info-section div {
+            margin-bottom: 10px;
+        }
 
-#tes th,
-#tes td {
-    text-align: left;
-}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #ffffff;
+        }
 
 </style>
 
 <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.2/af-2.7.0/b-3.0.1/b-colvis-3.0.1/b-html5-3.0.1/b-print-3.0.1/cr-2.0.0/date-1.5.2/fc-5.0.0/fh-4.0.1/kt-2.12.0/r-3.0.0/rg-1.5.0/rr-1.5.0/sc-2.4.1/sb-1.7.0/sp-2.3.0/sl-2.0.0/sr-1.4.0/datatables.min.css" rel="stylesheet">
 
-<div class="modal-body">
-    <div class="horizontal-table">
-        <div class="event-details"> 
-            <div><strong>ID Acara:</strong> {{$acara->id}} </div>
-            <div><strong>Judul Acara:</strong> {{$acara->judul}}</div>
-            <div><strong>Waktu Acara:</strong> {{ \Carbon\Carbon::parse($acara->tgl_acara)->isoFormat('D MMMM Y') }} until {{ \Carbon\Carbon::parse($acara->wk_akhir)->format('h:i A') }}</div>
-            <div><strong>Reservasi tutup pada:</strong> {{ \Carbon\Carbon::parse($acara->wk_res)->isoFormat('D MMMM Y') }} </div>
-            <div><strong>Koordinator:</strong> {{$acara->User->name}} </div>
-            <div><strong>Tempat:</strong> {{$namaRuangString}} </div>
-            <div><strong>Deskripsi Acara:</strong> {{$acara->deskripsi}} </div>
-            <div><strong>Partisipan:</strong> {{ $acara->participantCount }}</div>
-        </div>
-    </div>    
+<div class="card-header">Detail:</div>
+<div class="card-body">
+    <table>
+        <tr>
+            <th>Judul Acara</th>
+            <td>{{ $acara->judul }}</td>
+        </tr>
+        <tr>
+            <th>Waktu Acara</th>
+            <td>{{ \Carbon\Carbon::parse($acara->tgl_acara)->isoFormat('D MMMM Y') }} hingga {{ \Carbon\Carbon::parse($acara->wk_akhir)->format('h:i A') }}</td>
+        </tr>
+        <tr>
+            <th>Reservasi Tutup Pada</th>
+            <td>{{ \Carbon\Carbon::parse($acara->wk_res)->isoFormat('D MMMM Y') }}</td>
+        </tr>
+        <tr>
+            <th>Koordinator</th>
+            <td>{{ $acara->User->name }}</td>
+        </tr>
+        <tr>
+            <th>Tempat</th>
+            <td>{{ $namaRuangString }}</td>
+        </tr>
+        <tr>
+            <th>Deskripsi Acara</th>
+            <td>{{ $acara->deskripsi }}</td>
+        </tr>
+        <tr>
+            <th>Partisipan</th>
+            <td>{{ $acara->participantCount }}</td>
+        </tr>
+    </table>
 </div>
+
+    </div>
 
 <div class="card">
     <div class="card-header">Partisipan</div>

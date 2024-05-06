@@ -22,20 +22,21 @@ class ruangController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            $request->validate([
-                'nama' => 'required|string|max:255',
-                'jenis' => 'required|string|in:Indoor,Outdoor',
-                'tempat' => 'required|string|max:255',
-            ]);
-      
-            $ruang = new Ruang(); 
-            $ruang->nama = $request->nama;
-            $ruang->jenis = $request->jenis;
-            $ruang->tempat = $request->tempat;
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'jenis' => 'required|string|in:Indoor,Outdoor',
+            'tempat' => 'required|string|max:255',
+        ]);
+  
+        $ruang = new Ruang(); 
+        $ruang->nama = $request->nama;
+        $ruang->jenis = $request->jenis;
+        $ruang->tempat = $request->tempat;
         
-            $ruang->save();
-            return redirect()->route('ruang.index')->with('tambah', 'Data Ruang Berhasil Di Tambahkan'); 
+        $ruang->save();
+        return redirect()->route('ruang.index')->with('tambah', 'Data Ruang Berhasil Di Tambahkan'); 
+        
+        try {
         } catch (\Throwable $th) {
             return redirect()->route('ruang.index')->with('eror', 'Data Ruang Gagal Di Tambahkan'); 
         }
@@ -75,7 +76,7 @@ class ruangController extends Controller
             $ruang->save();
             return redirect()->route('ruang.index')->with('edit', 'Data Ruang Berhasil Di Update');      
         } catch (\Throwable $th) {
-            return redirect()->route('ruang.edit', $id)->with('eror', 'Data Ruang Gagal Di Update');      
+            return redirect()->route('ruang.index')->with('eror', 'Data Ruang Gagal Di Update');  
         }
        
     }
